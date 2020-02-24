@@ -1,39 +1,40 @@
-
-<div	class="container	content">
+<div	class="container content">
   <div	class="row">
           <div	class="col-md-6	offset-md-3">
                   <span	class="anchor"	id="formLogin"></span>
                   <!-- form	card	login	with	validation	feedback	-->
-                  <div	class="card	card-outline-secondary">
+                  <div	class="card card-outline-secondary">
                           <div	class="card-header">
-                                  <h3	class="mb-0">Whishlist</h3>
+                                  <h3 class="mb-0">Whishlist</h3>
                           </div>
                           <div	class="card-body">
-                                  <form>
-                                  	<div	class="form-group">
-                                      <label	for="nombre">Nombre1</label>
-                                      <input	type="text"	class="form-control"	id="nombre"	placeholder="Ingresar	nombre..." #nombre>
-                                  </div>
-                                  <div	class="form-group">
-                                      <label	for="Imagen	Url">Imagen	Url</label>
-                                      <input	type="text"	class="form-control"	id="imagenUrl"	placeholder="Ingresar	url..." #url>
-                                  </div>
-                                  <button	type="submit"	class="btn btn-primary" (click)='guardar(nombre.value, url.value)'>Guardar!</button>
-                              </form>
-                      </div>
-              </div>
-      </div>
-</div>
-<hr class="mb-5">
-<div class="row">
-      <app-destino-viaje *ngFor="let d of destinos" [destino] = 'd'></app-destino-viaje>
-</div>
+                              <app-form-destino-viaje (ItemAdded)="agregado($event)"></app-form-destino-viaje>
+                         </div>
+                  </div>
+          </div>
+  </div> <hr class="mb-5">
+        <div class="row row-flex">
+        <app-destino-viaje 
+                *ngFor="let d of destinosApiClient.getAll(); let i=index" 
+                [destino] = 'd'
+                [position] = 'i+1'
+                (clicked) = "elegido($event)"
+                >
+        </app-destino-viaje> <!--$event es equivalente a usar d-->
+        </div>
+        <hr class="mb-5">
+        <div class="row row-flex">
+            <h5>Actividad</h5>
+            <ul>
+                    <li *ngFor="let u of updates;">{{u}}</li>
+            </ul>
+        </div>
 </div>
 
 
-                                    <br>
+
 <!--x es un iterador que recorre la variable arreglo destinos-->
 <!--<app-destino-viaje *ngFor="let x of destinos" [nombre]="x"></app-destino-viaje>-->
-<br>
+
 <!--<input	name	=	'titulo'	type='text'	#titulo>
 <input	name	=	'titulo'	type='submit'	(click)='agregar(titulo.value)'>-->
